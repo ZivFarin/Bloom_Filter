@@ -29,7 +29,7 @@ FALSE_MAX_SIZE = FALSE_MIN_SIZE + 2
 
 def rand_string(shortest, longest):
     """
-    Createsssss a string of random ASCII characters - at a length within a given range.
+    Createsss a string of random ASCII characters - at a length within a given range.
 
     :param shortest: Minimal length of string.
     :param longest: Maximal length of string.
