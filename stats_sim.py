@@ -1,9 +1,15 @@
 """
-"statistics_simulation":
-Prints the amount of mistakes that were made during a hash-table check - according to constants value.
-(Only mistakes possible are false-positive)
+Prints statistics about mistakes that are made when checking if elements of one DB are elements of another (hashed) DB.
+The simulation parameters are defined in the programs constants.
+(Mistakes = false-positive calls)
 
-# rand-String is downloaded from: https://pypi.org/project/rand-string/
+Instructions:
+1. Define the simulations parameters - which are the 1st 4 constants of this program.
+2. Run simulation.
+
+Imports:
+"mmh3" was downloaded from: https://pypi.org/project/mmh3/
+"rand-String" was downloaded from: https://pypi.org/project/rand-string/
 """
 import random
 
@@ -14,17 +20,19 @@ import mmh3
 HASH_AMOUNT = 13
 # The size of the hashing table.
 TABLE_SIZE = 32000000
-# The size of the randomly generated DB to be hashed into table
+# The size of the randomly generated DB to be hashed into table.
 DB_SIZE = 1000000
 # The amount of checks that would be made against the hashing table with elements that are NOT in the DB.
 SAMPLE_SIZE = 50000
 
-# Determines the length of each element in the DB. (changing is not recommended for simulation usages)
+# Determines the length of each element in the DB. (changing is not recommended)
 DB_ELEMENT_LEN = 6
 # Determines the MINIMAL length of each of the not-in-DB elements. (must be > DB_ELEMENTS_LEN!)
 FALSE_MIN_SIZE = DB_ELEMENT_LEN + 1
 # Determines the MINIMAL length of each of the not-in-DB elements. (must be >= FALSE_MIN_SIZE)
 FALSE_MAX_SIZE = FALSE_MIN_SIZE + 2
+# Creates the empty hash table.
+TABLE = [0] * TABLE_SIZE
 
 
 def rand_string(shortest, longest):
@@ -56,7 +64,7 @@ def fill_table(db_size, table, hash_amount):
     print("Data base hashing - DONE.\n")
 
 
-def hash_check(element, table, hash_amount):
+def hashes_match(element, table, hash_amount):
     """
     :param element: An element to check.
     :param table: A hashing table to check against.
@@ -70,7 +78,7 @@ def hash_check(element, table, hash_amount):
     return True
 
 
-def mistakes_count(elements_amount, table, hash_amount):
+def count_mistakes(elements_amount, table, hash_amount):
     """
     Checks how many elements of a randomly generated data-base are positive for hash_check().
 
@@ -83,7 +91,7 @@ def mistakes_count(elements_amount, table, hash_amount):
     count = 0
     for i in range(1, elements_amount):
         falsy = rand_string(FALSE_MIN_SIZE, FALSE_MAX_SIZE)
-        if hash_check(falsy, table, hash_amount):
+        if hashes_match(falsy, table, hash_amount):
             count = count + 1
     print("Check done.\n")
     return count
@@ -96,7 +104,7 @@ def calc_percentage(sample_size, mistakes_amount):
     return (mistakes_amount / sample_size) * 100
 
 
-def form_calc(m, N, K):
+def calc_formula(m, N, K):
     """
     Calculates the formula from question b.
     Excuse us for the ugliness.
@@ -111,7 +119,7 @@ def form_calc(m, N, K):
     return val_in_percents
 
 
-def end_print(sample_size, mistakes_amount, percentage, table_size, formula_val):
+def print_summary(sample_size, mistakes_amount, percentage, table_size, formula_val):
     """
     Prints the summary of the simulation.
 
@@ -127,17 +135,16 @@ def end_print(sample_size, mistakes_amount, percentage, table_size, formula_val)
           f"{mistakes_amount} false answers were made,\n"
           f"which are {percentage}% of the over-all amount of checks.\n"
           f"In comparison, the expected mistakes percentage made should be, by the formula: {formula_val}%\n"
-          f"the difference between the current test and the prediction is: {abs(percentage - formula_val)}%\n\n"
+          f"the difference between the current test and the formulas prediction is: {abs(percentage - formula_val)}%\n\n"
           f"Thanks and have a good day :)")
 
 
 def main():
-    table = [0] * TABLE_SIZE
-    fill_table(DB_SIZE, table, HASH_AMOUNT)
-    mistakes = mistakes_count(SAMPLE_SIZE, table, HASH_AMOUNT)
-    percentage = calc_percentage(SAMPLE_SIZE, mistakes)
-    formula = form_calc(TABLE_SIZE, DB_SIZE, HASH_AMOUNT)
-    end_print(SAMPLE_SIZE, mistakes, percentage, TABLE_SIZE, formula)
+    fill_table(DB_SIZE, TABLE, HASH_AMOUNT)
+    mistakes_amount = count_mistakes(SAMPLE_SIZE, TABLE, HASH_AMOUNT)
+    percentage = calc_percentage(SAMPLE_SIZE, mistakes_amount)
+    formula = calc_formula(TABLE_SIZE, DB_SIZE, HASH_AMOUNT)
+    print_summary(SAMPLE_SIZE, mistakes_amount, percentage, TABLE_SIZE, formula)
 
 
 if __name__ == '__main__':
