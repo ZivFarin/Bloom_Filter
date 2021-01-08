@@ -1,24 +1,33 @@
 """
-Prints what elements from CHECK_FILE are recognized, through a hashing database, as elements of the DB_FILE.
+Prints what elements from CHECK_FILE are recognized, through the use of a hashing table, as elements of the DB_FILE.
+
+Instructions:
+1. Place files of "DB_FILE" and "CHECK_FILE" in programs directory.
+2. Fill, if you wish, the other 2 constants.
+2. Run.
+
+Imports:
+"mmh3" was downloaded from: https://pypi.org/project/mmh3/
 """
 
 import mmh3
 
-# The file to be inserted to the hashing table.
+# The name of the file to be inserted to the hashing table.
 DB_FILE = "evens.txt"
-# The file to check against the hashing table.
+# The name of the file to check against the hashing table (against the hashed data base).
 CHECK_FILE = "all.txt"
 
-# The length of the hashing table.
-TABLE_LENGTH = 32000000
 # The amount of hash functions used to hash & hash-check each element.
 HASH_AMOUNT = 13
+# The length of the hashing table.
+TABLE_LENGTH = 32000000
+# Initiation of hashing table filled with zeros.
+TABLE = [0] * TABLE_LENGTH
 
 
-def inserts(data_base, table, hash_amount):
+def hash_into_table(data_base, table, hash_amount):
     """
-    Inserts '1's into the appropriate places in the table (according to the hashes) for a given data_base.
-    Runtime: O(hash_amount * O(murmurhash)) * |Inputs| = O(hash_amount * O(1)) * |Inputs| = O(hash_amount * |Inputs|)
+    Inserts '1's into the appropriate places in the table (according to the hash functions) for a given data_base.
 
     :param data_base: List of elements to hash into the table.
     :param table: A list to hash the DB into.
@@ -30,7 +39,7 @@ def inserts(data_base, table, hash_amount):
             table[hash_val] = 1
 
 
-def hash_check(element, table, hash_amount):
+def hashes_match(element, table, hash_amount):
     """
     :param element: An element to check.
     :param table: A hashing table to check against.
@@ -44,17 +53,16 @@ def hash_check(element, table, hash_amount):
     return True
 
 
-def check(check_list, table, hash_amount):
+def preform_check(check_list, table, hash_amount):
     """
     For every element in check_list, prints if it is positive for hash_check.
-    Runtime: O(hash_amount * |check_list|)
 
     :param check_list: List of elements to check.
     :param table: The hash table that the elements from "check_list" would be checked against.
     :param hash_amount: How many hash functions would be used in the process.
     """
     for element in check_list:
-        if hash_check(element, table, hash_amount):
+        if hashes_match(element, table, hash_amount):
             print(f"{element} is in the database")
         else:
             print(f"{element} is not in the database")
@@ -63,7 +71,6 @@ def check(check_list, table, hash_amount):
 def pars_file(file_name):
     """
     Parses the given file, by commas, into a list of strings.
-    Runtime: O(characters in file)
 
     :param file_name: Name of the file.
     :return: The aforementioned list.
@@ -72,11 +79,10 @@ def pars_file(file_name):
 
 
 def main():
-    table = [0] * TABLE_LENGTH
     db_list = pars_file(DB_FILE)
-    inserts(db_list, table, HASH_AMOUNT)
+    hash_into_table(db_list, TABLE, HASH_AMOUNT)
     checks_list = pars_file(CHECK_FILE)
-    check(checks_list, table, HASH_AMOUNT)
+    preform_check(checks_list, TABLE, HASH_AMOUNT)
 
 
 if __name__ == '__main__':
