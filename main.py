@@ -3,7 +3,7 @@ Prints what elements from CHECK_FILE are recognized, through the use of a hashin
 
 Instructions:
 1. Place files of "DB_FILE" and "CHECK_FILE" in programs directory.
-2. Fill, if you wish, the other 2 constants.
+2. Fill the matching files names in the first 2 constants of the program, respectively.
 2. Run.
 
 Imports:
