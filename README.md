@@ -2,7 +2,7 @@
 
 #### From the [Data Structures & Intro to Algorithms](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
 
-### Code files:
+## Code files:
 
 - #### main
 The main programming question of the work. 
@@ -17,7 +17,7 @@ The simulation parameters can be defined in the programs constants.
 
 
 
-### Text files:
+## Text files:
 
 - #### M.M.N 14.docx
 Where all of the calculating quistions are
