@@ -1,4 +1,4 @@
-# Bloom Filter - A 'Data Structures & Intro to Algorithms' Project
+# Assignment 14 - Bloom Filter
 
 #### From the [Data Structures & Intro to Algorithms](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
 
