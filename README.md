@@ -1,11 +1,11 @@
 # Bloom Filter - A 'Data Structures & Intro to Algorithms' Project
 
-from [this](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
+#### From the [Data Structures & Intro to Algorithms](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
 
 ### Code files:
 
 - #### main
-The main programming question of the work.
+The main programming question of the work. 
 Prints what elements from CHECK_FILE(1st clients input) are recognized, through the use of a hashing table,
 as elements of the DB_FILE (2nd clients input).
 
