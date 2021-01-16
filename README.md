@@ -26,4 +26,4 @@ Where all of the calculating quistions are
 Used as default inputs to be used by "main.py".
 
 - #### More Checks *(folder)*:
-Contains more inputs for main.
+Contains more inputs for "main.py".
