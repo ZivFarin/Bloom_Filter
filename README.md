@@ -1,6 +1,6 @@
-# Assignment 14 - Bloom Filter
+# Bloom Filter
 
-#### From the [Data Structures & Intro to Algorithms](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
+#### This is assignment 14 from the [Data Structures & Intro to Algorithms](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
 
 ## Code Files:
 
