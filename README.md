@@ -1,18 +1,20 @@
-# Bloom Filter
+# Bloom Filters
 
 #### This is assignment 14 from the [Data Structures & Intro to Algorithms](https://www.openu.ac.il/courses/20407.htm) course in [The Open University of Israel](https://www.openu.ac.il/).
+#### For more about [the 'Bloom Filter' hashing method](https://en.wikipedia.org/wiki/Bloom_filter)
 
 ## Code Files:
 
 - #### main
 The main programming question of the work. 
-Prints what elements from CHECK_FILE(1st clients input) are recognized, through the use of a hashing table,
-as elements of the DB_FILE (2nd clients input).
+First, it hashes into a bloom filter the strings of the 'DB_FILE',
+Then, checks which of the strings in 'CHECK_FILE' is recognized as a part of 'DB_FILE'
 
 - #### stats_sim
 The bonus question.
-Prints some statistics about mistakes that are made when checking if elements of one DB are elements of another (hashed) DB.
-The simulation parameters can be defined in the programs constants.
+Simulates two *disjointed* sets of strings,
+Makes the same check made in the 'main file',
+and prints a statistical analysis about the amount of mistakes made in the simulation.
 (Mistakes = false-positive calls)
 
 
@@ -20,7 +22,7 @@ The simulation parameters can be defined in the programs constants.
 ## Text Files:
 
 - #### M.M.N 14.docx
-Where all of the calculating quistions are
+The assignment main doc.
 
 - #### "All" and "even"
 Used as default inputs to be used by "main.py".
